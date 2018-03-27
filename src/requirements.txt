@@ -1,2 +1,0 @@
-Django==1.9
-djangorestframework==3.7.7
