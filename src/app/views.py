@@ -1,12 +1,15 @@
 from django.shortcuts import render
 from django.views.generic.list import ListView
-from .models import Product
+from rest_framework import viewsets
+from . import models
+from serializers import Product_Serializer, Inventory_Serializer
+from rest_framework.response import Response
 
 # Create your views here.
-class Products_list(ListView):
-    model = Product
-    template_name = "product_list.html"
+class Products_list(viewsets.ModelViewSet):
+    queryset = models.Product.objects.all()
+    serializer_class = Product_Serializer
 
-    def get_context_data(self, **kwargs):
-        product_list = super().get_context_data(**kwargs)
-        return product_list
+class Inventory_list(viewsets.ModelViewSet):
+    queryset = models.Inventory.objects.all()
+    serializer_class = Inventory_Serializer
